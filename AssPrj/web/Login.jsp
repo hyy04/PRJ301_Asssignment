@@ -61,7 +61,7 @@
 <body>
     <div class="login-container">
         <h2>Login</h2>
-        <form action="login" method="post">
+        <form action="Login" method="post">
             <div class="mb-3">
                 <label for="username" class="form-label">User name</label>
                 <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required>
