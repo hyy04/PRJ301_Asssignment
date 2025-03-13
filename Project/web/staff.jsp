@@ -1,10 +1,16 @@
+<%-- 
+    Document   : employee
+    Created on : 4 thg 3, 2025, 21:54:50
+    Author     : Admin
+--%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang Chủ</title>
+    <title>Trang Chủ - Office</title>
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- CSS nhúng trực tiếp -->
@@ -20,9 +26,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            height: 100vh;
             background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            padding: 20px;
+            overflow: hidden;
         }
 
         .container {
@@ -30,9 +36,9 @@
             padding: 40px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
-            width: 100%;
             text-align: center;
+            max-width: 650px;
+            width: 150%;
             transition: transform 0.3s ease;
         }
 
@@ -41,39 +47,48 @@
         }
 
         .container h1 {
-            font-size: 36px;
+            font-size: 28px;
             color: #2a82d6;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
-        .menu-btn {
+        .container h1 i {
+            font-size: 32px;
+            color: #2a82d6;
+        }
+
+        .button {
             display: block;
             width: 100%;
             padding: 15px;
-            margin-bottom: 20px;
+            margin: 15px 0;
             font-size: 16px;
             font-weight: 500;
-            color: #333;
-            background: #fff;
-            border: 1px solid #ddd;
+            color: #fff;
+            background: linear-gradient(90deg, #2a82d6 0%, #4a9ff5 100%);
+            border: none;
             border-radius: 30px;
             text-decoration: none;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 15px rgba(42, 130, 214, 0.3);
         }
 
-        .menu-btn:hover {
-            background: #f0f7ff;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            color: #2a82d6;
+        .button:hover {
+            background: linear-gradient(90deg, #4a9ff5 0%, #2a82d6 100%);
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(42, 130, 214, 0.4);
         }
 
-        .menu-btn i {
-            margin-right: 10px;
+        .button i {
+            margin-right: 8px;
         }
 
+        /* Responsive */
         .logout-btn {
             display: inline-block;
             padding: 15px 30px;
@@ -119,10 +134,9 @@
 </head>
 <body>
     <div class="container">
-        <h1>Home</h1>
-        <a href="createLeaveRequest.jsp" class="menu-btn"><i class="fas fa-plus"></i> tạo đơn xin nghỉ phép</a>
-        <a href="viewCreatedRequests.jsp" class="menu-btn"><i class="fas fa-eye"></i> xem đơn đã tạo</a>
-        <a href="employeeCreatedRequests.jsp" class="menu-btn"><i class="fas fa-users"></i> tình trạng lao động của nhân viên</a>
+        <h1><i class="fas fa-home"></i> Trang Chủ</h1>
+        <a href="createLeaveRequest.jsp" class="button"><i class="fas fa-file-alt"></i> Tạo đơn xin nghỉ phép</a>
+        <a href="viewCreatedRequests.jsp" class="button"><i class="fas fa-eye"></i> Xem đơn đã tạo</a>
         <a href="login.jsp" class="logout-btn" onclick="return confirm('Bạn có chắc chắn muốn đăng xuất?')"><i class="fas fa-sign-out-alt"></i> đăng xuất</a>
     </div>
 </body>
