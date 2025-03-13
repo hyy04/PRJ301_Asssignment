@@ -13,6 +13,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import javax.management.remote.TargetedNotification;
 
 /**
@@ -78,7 +79,10 @@ public class LoginController extends HttpServlet {
             request.setAttribute("error", "Invalid username or password");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
-            response.sendRedirect("staff.jsp");
+            HttpSession session = request.getSession();
+            session.setAttribute("acc", account);
+            
+            response.sendRedirect("manage.jsp");
         }
     }
 

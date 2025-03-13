@@ -4,6 +4,7 @@
     Author     : Admin
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="vi">
@@ -134,10 +135,28 @@
 <body>
     <div class="container">
         <h1><i class="fas fa-home"></i> Trang Chủ</h1>
-        <a href="createLeaveRequest.jsp" class="button"><i class="fas fa-file-alt"></i> Tạo đơn xin nghỉ phép</a>
-        <a href="viewAllRequests.jsp" class="button"><i class="fas fa-eye"></i> Xem tất cả đơn đã tạo</a>
-        <a href="employeeStatus.jsp" class="button"><i class="fas fa-users"></i> Tình trạng lao động của nhân viên</a>
-        <a href="login.jsp" class="logout-btn" onclick="return confirm('Bạn có chắc chắn muốn đăng xuất?')"><i class="fas fa-sign-out-alt"></i> đăng xuất</a>
+
+        <!-- Nhân viên: Hiển thị 2 tùy chọn -->
+        <c:if test="${sessionScope.acc.staff == 1}">
+            <a href="createLeaveRequest.jsp" class="button"><i class="fas fa-file-alt"></i> Tạo đơn xin nghỉ phép</a>
+            <a href="viewCreatedRequests.jsp" class="button"><i class="fas fa-eye"></i> Xem tất cả đơn đã tạo</a>
+        </c:if>
+
+        <!-- Quản lý: Hiển thị 3 tùy chọn -->
+        <c:if test="${sessionScope.acc.manage == 1}">
+            <a href="createLeaveRequest.jsp" class="button"><i class="fas fa-file-alt"></i> Tạo đơn xin nghỉ phép</a>
+            <a href="viewAllRequests.jsp" class="button"><i class="fas fa-eye"></i> Xem tất cả đơn đã tạo</a>
+            <a href="employeeStatus.jsp" class="button"><i class="fas fa-users"></i> Tình trạng lao động của nhân viên</a>
+        </c:if>
+
+        <!-- Giám đốc: Hiển thị 2 tùy chọn -->
+        <c:if test="${sessionScope.acc.director == 1}">
+            <a href="viewAllRequests.jsp" class="button"><i class="fas fa-eye"></i> Xem tất cả đơn đã tạo</a>
+            <a href="employeeStatus.jsp" class="button"><i class="fas fa-users"></i> Tình trạng lao động của nhân viên</a>
+        </c:if>
+
+        <!-- Nút đăng xuất -->
+        <a href="login.jsp" class="logout-btn" onclick="return confirm('Bạn có chắc chắn muốn đăng xuất?')"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
     </div>
 </body>
 </html>

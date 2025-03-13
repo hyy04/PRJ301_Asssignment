@@ -9,26 +9,23 @@ package data;
  * @author Admin
  */
 public class Account {
-    //private int id;
+   
     private String username;
     private String password;
+    private int staff;
+    private int manage;
+    private int director;
     
     public Account(){
     }
 
-    public Account(String username, String password) {
-        //this.id = id;
+    public Account(String username, String password, int staff, int manage, int director) {
         this.username = username;
         this.password = password;
+        this.staff = staff;
+        this.manage = manage;
+        this.director = director;
     }
-
-//    public int getId() {
-//        return id;
-//    }
-
-//    public void setId(int id) {
-//        this.id = id;
-//    }
 
     public String getUsername() {
         return username;
@@ -45,7 +42,31 @@ public class Account {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
+    public int getStaff() {
+        return staff;
+    }
+
+    public void setStaff(int staff) {
+        this.staff = staff;
+    }
+
+    public int getManage() {
+        return manage;
+    }
+
+    public void setManage(int manage) {
+        this.manage = manage;
+    }
+
+    public int getDirector() {
+        return director;
+    }
+
+    public void setDirector(int director) {
+        this.director = director;
+    }
+
     
 }
 

@@ -15,7 +15,7 @@ public class AccDb extends DBContext{
     public Account get(String username, String password){
         connection = getConnection();
         String sql = "SELECT *\n"
-                + "  FROM Account\n"
+                + "  FROM account\n"
                 + "where username = ? and [password] = ?";
         try {
             //- Tạo đối tượng PrepareStatement
@@ -29,7 +29,13 @@ public class AccDb extends DBContext{
             if (resultSet.next()) {
                 String user = resultSet.getString("username");
                 String pass = resultSet.getString("password");
-                Account account = new Account(username, password);
+                Account account = new Account(resultSet.getString(1),
+                        resultSet.getString(2),
+                        resultSet.getInt(3),
+                        resultSet.getInt(4),
+                        resultSet.getInt(5));
+//                Account account = new Account(username, password);
+
                 return account;
             }
         } catch (SQLException e) {

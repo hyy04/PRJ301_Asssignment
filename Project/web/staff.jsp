@@ -137,7 +137,7 @@
         <h1><i class="fas fa-home"></i> Trang Chủ</h1>
         <a href="createLeaveRequest.jsp" class="button"><i class="fas fa-file-alt"></i> Tạo đơn xin nghỉ phép</a>
         <a href="viewCreatedRequests.jsp" class="button"><i class="fas fa-eye"></i> Xem đơn đã tạo</a>
-        <a href="login.jsp" class="logout-btn" onclick="return confirm('Bạn có chắc chắn muốn đăng xuất?')"><i class="fas fa-sign-out-alt"></i> đăng xuất</a>
+        <a href="login" class="logout-btn" onclick="return confirm('Bạn có chắc chắn muốn đăng xuất?')"><i class="fas fa-sign-out-alt"></i> đăng xuất</a>
     </div>
 </body>
 </html>

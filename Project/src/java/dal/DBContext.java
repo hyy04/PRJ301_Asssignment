@@ -25,7 +25,7 @@ public class DBContext {
     public Connection getConnection() {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost\\SQLEXPRESS:1433;databaseName=AssPrj301;trustServerCertificate=true; ";
+            String url = "jdbc:sqlserver://localhost\\SQLEXPRESS:1433;databaseName=prj2;trustServerCertificate=true; ";
             String user = "hy";
             String password = "123";
             connection = DriverManager.getConnection(url, user, password);
@@ -40,5 +40,5 @@ public class DBContext {
 //        DBContext test = new DBContext();
 //        test.connection = test.getConnection();
 //        System.out.println(test.connection);
-//    }
+//   }
 }
