@@ -173,19 +173,19 @@
 <body>
     <div class="container">
         <h1><i class="fas fa-file-alt"></i> Đơn Xin Nghỉ Phép</h1>
-        <form action="submitLeaveRequest" method="post">
+        <form action="SubmitLeave" method="post">
             <div class="form-group">
                 <label for="fullName">Họ & Tên</label>
                 <input type="text" id="fullName" name="fullName" placeholder="Nhập họ và tên" required>
             </div>
-            <div class="form-group">
+<!--            <div class="form-group">
                 <label for="position">Chức Vụ</label>
                 <input type="text" id="position" name="position" placeholder="Nhập chức vụ" required>
             </div>
             <div class="form-group">
                 <label for="department">Phòng Ban</label>
                 <input type="text" id="department" name="department" placeholder="Nhập phòng ban" required>
-            </div>
+            </div>-->
             <div class="form-group">
                 <label for="startDate">Từ Ngày</label>
                 <input type="date" id="startDate" name="startDate" required>

@@ -14,13 +14,19 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.io.PrintWriter;
 
 /**
  *
  * @author Admin
  */
 public class SubmitLeave extends HttpServlet {
+private static final long serialVersionUID = 1L;
 
+    // Thông tin kết nối SQL Server
+    private static final String DB_URL = "jdbc:sqlserver://localhost\\SQLEXPRESS:1433;databaseName=prj6;trustServerCertificate=true;";
+    private static final String DB_USER = "hy";
+    private static final String DB_PASS = "123";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -74,15 +80,17 @@ public class SubmitLeave extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        String title = request.getParameter("title");
+        
         String start_date = request.getParameter("start_date");
         String end_date = request.getParameter("end_date");
-        String created_by = request.getParameter("created_by");
+        String title = request.getParameter("title");
+//        String created_by = request.getParameter("created_by");
 
         HttpSession session = request.getSession();
+        String created_by = (String) session.getAttribute("uesrname");
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection connection = DriverManager.getConnection(title, title, end_date);
+            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
 
             String sql = "INSERT INTO leave_requests (title, start_date, end_date, created_by, status) VALUES (?, ?, ?, ?, 'Inprogress')";
             PreparedStatement stm = connection.prepareStatement(sql);
@@ -92,10 +100,12 @@ public class SubmitLeave extends HttpServlet {
             stm.setString(4, created_by);
             stm.executeUpdate();
             
-            response.sendRedirect("");
+            stm.close();
+            connection.close();
+            response.sendRedirect("success.jsp");
 
         } catch (Exception e) {
-            
+            request.getRequestDispatcher("createLeaveRequest.jsp").forward(request, response);
         }
     }
 
