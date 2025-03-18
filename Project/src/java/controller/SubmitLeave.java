@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dal.SubmitDB;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,6 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.PrintWriter;
+import java.util.Date;
 
 /**
  *
@@ -22,11 +24,12 @@ import java.io.PrintWriter;
  */
 public class SubmitLeave extends HttpServlet {
 private static final long serialVersionUID = 1L;
+private SubmitDB submitDB;
+public void init() throws ServletException{
+    submitDB = new SubmitDB();
+}
 
-    // Thông tin kết nối SQL Server
-    private static final String DB_URL = "jdbc:sqlserver://localhost\\SQLEXPRESS:1433;databaseName=prj6;trustServerCertificate=true;";
-    private static final String DB_USER = "hy";
-    private static final String DB_PASS = "123";
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -65,7 +68,8 @@ private static final long serialVersionUID = 1L;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.sendRedirect("createLeaveRequest.jsp");
+        
     }
 
     /**
@@ -81,32 +85,41 @@ private static final long serialVersionUID = 1L;
             throws ServletException, IOException {
         processRequest(request, response);
         
+        
         String start_date = request.getParameter("start_date");
         String end_date = request.getParameter("end_date");
-        String title = request.getParameter("title");
+        String title = request.getParameter("reson");
 //        String created_by = request.getParameter("created_by");
-
+//
         HttpSession session = request.getSession();
         String created_by = (String) session.getAttribute("uesrname");
+       
         try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-
-            String sql = "INSERT INTO leave_requests (title, start_date, end_date, created_by, status) VALUES (?, ?, ?, ?, 'Inprogress')";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, title);
-            stm.setString(2, start_date);
-            stm.setString(3, end_date);
-            stm.setString(4, created_by);
-            stm.executeUpdate();
-            
-            stm.close();
-            connection.close();
+           submitDB.insert(title, start_date, end_date, created_by);
             response.sendRedirect("success.jsp");
-
         } catch (Exception e) {
+            e.printStackTrace();
             request.getRequestDispatcher("createLeaveRequest.jsp").forward(request, response);
         }
+//        try {
+//            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+//            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+//
+//            String sql = "INSERT INTO leave_requests (title, start_date, end_date, created_by, status) VALUES (?, ?, ?, ?, 'Inprogress')";
+//            PreparedStatement stm = connection.prepareStatement(sql);
+//            stm.setString(1, title);
+//            stm.setString(2, start_date);
+//            stm.setString(3, end_date);
+//            stm.setString(4, created_by);
+//            stm.executeUpdate();
+//            
+//            stm.close();
+//            connection.close();
+//            response.sendRedirect("success.jsp");
+//
+//        } catch (Exception e) {
+//            request.getRequestDispatcher("createLeaveRequest.jsp").forward(request, response);
+//        }
     }
 
     /**
@@ -115,8 +128,9 @@ private static final long serialVersionUID = 1L;
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+   public String getServletInfo() {
+        return "Servlet to submit leave requests";
+    }
 }
+
+
